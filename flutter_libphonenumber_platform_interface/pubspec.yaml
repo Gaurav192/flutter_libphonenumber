@@ -1,0 +1,18 @@
+name: flutter_libphonenumber_platform_interface
+description: Leverages libphonenumber to allow for asynchronous and synchronous formatting of phone numbers in Flutter apps.
+version: 1.0.0
+homepage: https://github.com/bottlepay/flutter_libphonenumber
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.0  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^1.0.1
