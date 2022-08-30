@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_libphonenumber/src/country_data.dart';
 import 'package:flutter_libphonenumber/src/format_phone_result.dart';
 import 'package:flutter_libphonenumber/src/input_formatter/phone_mask.dart';
 import 'package:flutter_libphonenumber/src/phone_number_format.dart';
 import 'package:flutter_libphonenumber/src/phone_number_type.dart';
+import 'package:flutter_libphonenumber_platform_interface/flutter_libphonenumber_platform_interface.dart';
 
 export 'package:flutter_libphonenumber/src/country_data.dart';
 export 'package:flutter_libphonenumber/src/format_phone_result.dart';
@@ -18,9 +18,6 @@ class FlutterLibphonenumber {
   factory FlutterLibphonenumber() => _instance;
   static final FlutterLibphonenumber _instance =
       FlutterLibphonenumber._internal();
-
-  /// Method channel
-  final _channel = const MethodChannel('flutter_libphonenumber');
 
   /// Must call this before anything else so the countries data is populated.
   ///
@@ -59,9 +56,8 @@ class FlutterLibphonenumber {
     ///   }
     /// }
     /// ```
-    final result = await _channel
-            .invokeMapMethod<String, dynamic>('get_all_supported_regions') ??
-        {};
+    final result =
+        await FlutterLibphonenumberPlatform.instance.getAllSupportedRegions();
 
     final returnMap = <String, CountryWithPhoneCode>{};
     result.forEach(
@@ -95,11 +91,7 @@ class FlutterLibphonenumber {
   /// }
   /// ```
   Future<Map<String, String>> format(String phone, String region) async {
-    return await _channel.invokeMapMethod<String, String>('format', {
-          'phone': phone,
-          'region': region,
-        }) ??
-        <String, String>{};
+    return FlutterLibphonenumberPlatform.instance.format(phone, region);
   }
 
   /// Parse a single string and return a map in the format below. Throws an error if the
@@ -117,11 +109,7 @@ class FlutterLibphonenumber {
   /// }
   /// ```
   Future<Map<String, dynamic>> parse(String phone, {String? region}) async {
-    return await _channel.invokeMapMethod<String, dynamic>('parse', {
-          'phone': phone,
-          'region': region,
-        }) ??
-        <String, dynamic>{};
+    return FlutterLibphonenumberPlatform.instance.parse(phone, region: region);
   }
 
   /// Given a phone number, format it automatically using the masks we have from

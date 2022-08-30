@@ -2,6 +2,7 @@ name: flutter_libphonenumber
 description: Leverages libphonenumber to allow for asynchronous and synchronous formatting of phone numbers in Flutter apps.
 version: 1.2.4
 homepage: https://github.com/bottlepay/flutter_libphonenumber
+publish_to: none
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -10,7 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+    
+  flutter_libphonenumber_platform_interface:
+    git:
+      url: https://github.com/Gaurav192/flutter_libphonenumber/
+      ref: web
+      path: flutter_libphonenumber_platform_interface  
+  flutter_libphonenumber_web:
+    git:
+      url: https://github.com/Gaurav192/flutter_libphonenumber/
+      ref: web
+      path: flutter_libphonenumber_web
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,6 +44,8 @@ flutter:
         pluginClass: FlutterLibphonenumberPlugin
       ios:
         pluginClass: FlutterLibphonenumberPlugin
+      web:
+        default_package: flutter_libphonenumber_web  
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
