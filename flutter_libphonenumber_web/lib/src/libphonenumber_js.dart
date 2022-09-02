@@ -13,6 +13,7 @@ class PhoneNumberUtil {
   external PhoneNumber? getExampleNumberForType(
       String regionCode, /* PhoneNumberType */ int type);
   external int getCountryCodeForRegion(String region);
+  external bool isValidNumber(PhoneNumber number);
   external String format(
       PhoneNumber phoneNumber, /* PhoneNumberFormat */ int format);
   external PhoneNumber? parseAndKeepRawInput(String number, String? regionCode);

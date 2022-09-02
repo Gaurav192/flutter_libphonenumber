@@ -66,8 +66,9 @@ class FlutterLibphonenumber extends FlutterLibphonenumberPlatform {
   Future<Map<String, dynamic>> parse(String phone, {String? region}) async {
     final phoneUtil = PhoneNumberUtil.getInstance();
     final phoneNumber = phoneUtil.parseAndKeepRawInput(phone, region);
-    final info = <String, dynamic>{};
-    if (phoneNumber != null) {
+
+    if (phoneNumber != null && phoneUtil.isValidNumber(phoneNumber)) {
+      final info = <String, dynamic>{};
       info['type'] =
           PhoneNumberType.fromValue(phoneUtil.getNumberType(phoneNumber)).name;
       info['e164'] =
@@ -78,10 +79,11 @@ class FlutterLibphonenumber extends FlutterLibphonenumberPlatform {
           phoneUtil.format(phoneNumber, PhoneNumberFormat.national.value);
       info['country_code'] = phoneNumber.getCountryCode().toString();
       info['national_number'] = phoneNumber.getNationalNumber().toString();
+      return info;
+    } else {
+      throw Exception('Invalid Number');
     }
-    return info;
   }
 
-  String maskNumber(String number) =>
-      number.replaceAll(RegExp(r'\d'), "0");
+  String maskNumber(String number) => number.replaceAll(RegExp(r'\d'), "0");
 }
