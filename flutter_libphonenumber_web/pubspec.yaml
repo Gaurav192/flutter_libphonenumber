@@ -1,0 +1,38 @@
+name: flutter_libphonenumber_web
+description: Leverages libphonenumber to allow for asynchronous and synchronous formatting of phone numbers in Flutter apps.
+version: 1.0.0
+homepage: https://github.com/bottlepay/flutter_libphonenumber
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=1.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  flutter_libphonenumber_platform_interface:
+    git:
+      url: https://github.com/Gaurav192/flutter_libphonenumber/
+      ref: web
+      path: flutter_libphonenumber_platform_interface
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^1.0.1
+  pigeon: ^0.3.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  plugin:
+    implements: flutter_libphonenumber
+    platforms:
+      web:
+        pluginClass: FlutterLibphonenumber
+        fileName: flutter_libphonenumber_web.dart
