@@ -26,8 +26,8 @@ class MethodChannelFlutterLibphonenumber extends FlutterLibphonenumberPlatform {
 
   @override
   Future<Map<String, dynamic>> parse(String phone, {String? region}) async {
-    return (await _channel
-            .invokeMapMethod<String, dynamic>('parse')) ??
+    return (await _channel.invokeMapMethod<String, dynamic>(
+            'parse', {'phone': phone, 'region': region})) ??
         {};
   }
 }
